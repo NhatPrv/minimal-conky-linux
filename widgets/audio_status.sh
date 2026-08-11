@@ -1,5 +1,5 @@
 #!/bin/bash
-TYPE=$1 # sink hoặc source
+TYPE=$1
 DEFAULT_DEV="@DEFAULT_SINK@"
 [ "$TYPE" = "source" ] && DEFAULT_DEV="@DEFAULT_SOURCE@"
 
@@ -10,7 +10,7 @@ IS_MUTED=$(pactl get-${TYPE}-mute $DEFAULT_DEV 2>/dev/null | grep -q "yes" && ec
 PORT_NAME=$(pactl list ${TYPE}s 2>/dev/null | grep "Active Port:" | cut -d'-' -f3- | xargs | tr '[:lower:]' '[:upper:]')
 [ -z "$PORT_NAME" ] && PORT_NAME="UNKNOWN"
 
-# Cắt ngắn nếu quá dài
+# Cắt ngắn tên nếu dài
 PORT_SHORT=$(echo "$PORT_NAME" | cut -c1-18)
 
 # Lấy % Volume
